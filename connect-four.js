@@ -1,5 +1,7 @@
 import { Game } from './game.js';
-import Column from './column.js';
+import GameJsonSerializer from './GameJsonSerializer.js';
+import GameJsonDeserializer from './GameJsonDeserializer.js';
+
 let game;
 
 function updateUI() {
@@ -51,6 +53,11 @@ function updateUI() {
     }
 
   }
+
+  let parser = new GameJsonSerializer(game);
+  let gameData = parser.serialize();
+
+  localStorage.setItem('connect-four-game-save', gameData)
 }
 
 
@@ -100,4 +107,8 @@ window.addEventListener('DOMContentLoaded', event => {
   })
 
 
+  if (localStorage.getItem('connect-four-game-save') !== undefined) {
+    let parser = new GameJsonDeserializer(localStorage.getItem('connect-four-game-save'))
+    game = parser.deserialize();
+  }
 })

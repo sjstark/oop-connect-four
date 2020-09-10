@@ -24,5 +24,13 @@ export default class Column {
         return this.tokensArray[rowIndex];
     }
 
+    restore(restoreVals) {
+        this.tokensArray = restoreVals;
+
+        if (this.tokensArray[0] !== null) {
+            this.isFull = true;
+        }
+    }
+
 
 }
