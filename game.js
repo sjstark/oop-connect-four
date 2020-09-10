@@ -37,6 +37,7 @@ class Game {
 
         this.checkForTie();
         this.checkForColumnWin();
+        this.checkForRowWin();
     }
 
     checkForColumnWin(){
@@ -56,17 +57,21 @@ class Game {
     checkForRowWin() {
       if (this.winnerNumber){
         return;
-    }
-    for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++){
-
-
-        let column = this.columns[columnIndex];
-        let inspector = new ColumnWinInspector(column);
-        let result = inspector.inspect();
-        if (result){
-            this.winnerNumber = result;
         }
-    }
+        for (let columnIndex = 0; columnIndex <= 3; columnIndex++){
+            let column1 = this.columns[columnIndex];
+            let column2 = this.columns[columnIndex + 1];
+            let column3 = this.columns[columnIndex + 2];
+            let column4 = this.columns[columnIndex + 3];
+
+            let columnArr = [column1, column2, column3, column4];
+
+            let inspector = new RowWinInspector(columnArr);
+            let result = inspector.inspect();
+            if (result) {
+              this.winnerNumber = result;
+            }
+        }
     }
 
     getTokenAt(rowIndex, columnIndex) {
