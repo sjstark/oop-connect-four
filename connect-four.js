@@ -1,4 +1,27 @@
+import { Game } from './game.js';
 let game;
+
+function updateUI() {
+  if (game === undefined) {
+    document.getElementById('board-holder')
+      .classList.add('is-invisible')
+  } else {
+    document.getElementById('board-holder')
+      .classList.remove('is-invisible')
+    document.getElementById('game-name').innerHTML = game.getName()
+
+    const currentPlayer = game.currentPlayer;
+    const clickTargets = document.getElementById('click-targets');
+    if (currentPlayer === 1) {
+      clickTargets.classList.add('black');
+      clickTargets.classList.remove('red');
+    } else {
+      clickTargets.classList.add('red');
+      clickTargets.classList.remove('black');
+    }
+  }
+}
+
 
 window.addEventListener('DOMContentLoaded', event => {
 
@@ -11,9 +34,9 @@ window.addEventListener('DOMContentLoaded', event => {
     let player1Name = player1El.value;
     let player2Name = player2El.value;
     if (player1Name && player2Name) {
-      newGameBtn.disable = false;
+      newGameBtn.disabled = false;
     } else {
-      newGameBtn.disable = true;
+      newGameBtn.disabled = true;
     }
   }
 
@@ -25,10 +48,22 @@ window.addEventListener('DOMContentLoaded', event => {
     checkPlayerNames();
   })
 
+  newGameBtn.addEventListener('click', event => {
+    game = new Game(player1El.value, player2El.value)
+
+    player1El.value = '';
+    player2El.value = '';
+
+    checkPlayerNames();
+
+    updateUI();
+  })
+
+  let clickTargets = document.getElementById('click-targets');
+  clickTargets.addEventListener('click', e => {
+    game.playInColumn();
+    updateUI();
+  })
 
 
 })
-
-class Game {
-
-}
