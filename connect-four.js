@@ -1,4 +1,5 @@
 import { Game } from './game.js';
+import Column from './column.js';
 let game;
 
 function updateUI() {
@@ -23,6 +24,19 @@ function updateUI() {
     for (let row = 0; row <= 5; row ++) {
       for (let col = 0; col <= 6; col++) {
         let selectedElement = document.getElementById(`square-${row}-${col}`)
+        // console.log(selectedElement);
+        let playerId = game.getTokenAt(row, col);
+        selectedElement.innerHTML = '';
+        if (playerId === 1){
+          let child = document.createElement('div');
+          child.classList.add('token' , 'black');
+          selectedElement.appendChild(child);
+        } else if (playerId === 2) {
+          let child = document.createElement("div");
+          child.classList.add("token", "red");
+          selectedElement.appendChild(child);
+        }
+        
       }
     }
   }

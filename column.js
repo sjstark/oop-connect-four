@@ -1,6 +1,6 @@
 export default class Column {
     constructor(){
-        this.tokensArray = [null, null, null, null, null];
+        this.tokensArray = [null, null, null, null, null, null];
         this.full = false;
     }
 
@@ -8,6 +8,7 @@ export default class Column {
         for (let i = this.tokensArray.length - 1; i >= 0; i--){
             if (this.tokensArray[i] === null){
                 this.tokensArray[i] = playerNumber;
+                break;
             }
         }
     }
