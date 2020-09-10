@@ -36,9 +36,20 @@ function updateUI() {
           child.classList.add("token", "red");
           selectedElement.appendChild(child);
         }
-        
+
       }
     }
+
+    for (let i = 0; i <= 6; i++) {
+      let col = document.getElementById(`column-${i}`)
+      if (game.isColumnFull(i)) {
+        col.classList.add('full')
+      } else {
+        col.classList.remove('full')
+      }
+
+    }
+
   }
 }
 

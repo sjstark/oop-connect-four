@@ -1,7 +1,8 @@
 export default class Column {
     constructor(){
         this.tokensArray = [null, null, null, null, null, null];
-        this.full = false;
+                        // [ null, 1, 2, 1, 1, 2]
+        this.isFull = false;
     }
 
     add(playerNumber){
@@ -11,6 +12,12 @@ export default class Column {
                 break;
             }
         }
+
+        if (this.tokensArray[0] !== null) {
+            this.isFull = true;
+        }
+
+
     }
 
     getTokenAt(rowIndex){
