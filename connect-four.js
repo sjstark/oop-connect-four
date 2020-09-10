@@ -19,6 +19,12 @@ function updateUI() {
       clickTargets.classList.add('red');
       clickTargets.classList.remove('black');
     }
+
+    for (let row = 0; row <= 5; row ++) {
+      for (let col = 0; col <= 6; col++) {
+        let selectedElement = document.getElementById(`square-${row}-${col}`)
+      }
+    }
   }
 }
 
@@ -61,7 +67,10 @@ window.addEventListener('DOMContentLoaded', event => {
 
   let clickTargets = document.getElementById('click-targets');
   clickTargets.addEventListener('click', e => {
-    game.playInColumn();
+
+    let columnIndex = Number(e.target.id.slice(-1))
+
+    game.playInColumn(columnIndex);
     updateUI();
   })
 

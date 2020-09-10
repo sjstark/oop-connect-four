@@ -19,6 +19,11 @@ class Game {
         this.columns[columnIndex].add(this.currentPlayer);
         this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
     }
+
+    getTokenAt(rowIndex, columnIndex) {
+      let column = this.columns[columnIndex]
+      return column.getTokenAt(rowIndex);
+    }
 }
 
 export {
