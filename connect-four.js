@@ -3,6 +3,12 @@ import GameJsonSerializer from './GameJsonSerializer.js';
 import GameJsonDeserializer from './GameJsonDeserializer.js';
 
 let game;
+if (localStorage.getItem('connect-four-game-save') !== undefined) {
+  let parser = new GameJsonDeserializer(localStorage.getItem('connect-four-game-save'))
+  game = parser.deserialize();
+
+  updateUI();
+}
 
 function updateUI() {
   if (game === undefined) {
@@ -107,8 +113,5 @@ window.addEventListener('DOMContentLoaded', event => {
   })
 
 
-  if (localStorage.getItem('connect-four-game-save') !== undefined) {
-    let parser = new GameJsonDeserializer(localStorage.getItem('connect-four-game-save'))
-    game = parser.deserialize();
-  }
+
 })
