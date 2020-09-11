@@ -1,7 +1,7 @@
 body, html {
   padding: 0;
   margin: 0;
-  background-color: antiquewhite;
+  /* background-color: rgb(88, 88, 88); */
 }
 
 button {
@@ -46,6 +46,7 @@ main {
 
 #board-holder {
   flex: 0 0 525px;
+  position: relative;
 }
 
 #board-squares {
@@ -75,6 +76,10 @@ main {
   width: 525px;
 }
 
+#game-name {
+  font-size: 3em;
+}
+
 .click-target {
   background-color: transparent;
   box-sizing: border-box;
@@ -90,12 +95,17 @@ main {
   visibility: hidden;
 }
 
+.token-square {
+  position: relative;
+}
+
 .token {
   box-sizing: border-box;
   border-radius: 65px;
   height: 65px;
   margin: 5px;
   width: 65px;
+  position: absolute;
 }
 
 .token.red {

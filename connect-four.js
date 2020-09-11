@@ -1,14 +1,17 @@
 import { Game } from './game.js';
 import GameJsonSerializer from './GameJsonSerializer.js';
 import GameJsonDeserializer from './GameJsonDeserializer.js';
+import AnimationHandler from './Animation-Handler.js';
 
+let newestToken;
 let game;
-if (localStorage.getItem('connect-four-game-save') !== undefined) {
+if (localStorage.getItem('connect-four-game-save') !== null) {
   let parser = new GameJsonDeserializer(localStorage.getItem('connect-four-game-save'))
   game = parser.deserialize();
 
   updateUI();
 }
+
 
 function updateUI() {
   if (game === undefined) {
@@ -35,17 +38,30 @@ function updateUI() {
         // console.log(selectedElement);
         let playerId = game.getTokenAt(row, col);
         selectedElement.innerHTML = '';
+        let token;
         if (playerId === 1){
-          let child = document.createElement('div');
-          child.classList.add('token' , 'black');
-          selectedElement.appendChild(child);
+          token = document.createElement('div');
+          token.classList.add('token' , 'black');
+          selectedElement.appendChild(token);
         } else if (playerId === 2) {
-          let child = document.createElement("div");
-          child.classList.add("token", "red");
-          selectedElement.appendChild(child);
+          token = document.createElement("div");
+          token.classList.add("token", "red");
+          selectedElement.appendChild(token);
         }
 
       }
+    }
+
+    if (newestToken !== undefined) {
+      let [rowIndex, columnIndex] = newestToken;
+      let newestParent = document.getElementById(`square-${rowIndex}-${columnIndex}`)
+      newestToken = newestParent.childNodes[0];
+      newestToken.style.bottom = `${rowIndex * 100 + 100}%`
+
+      let animator = new AnimationHandler(newestToken, rowIndex);
+
+      animator.animate(newestToken);
+      newestToken = undefined;
     }
 
     for (let i = 0; i <= 6; i++) {
@@ -108,7 +124,12 @@ window.addEventListener('DOMContentLoaded', event => {
 
     let columnIndex = Number(e.target.id.slice(-1))
 
-    game.playInColumn(columnIndex);
+    let rowIndex = game.playInColumn(columnIndex);
+
+    if (rowIndex >= 0) {
+      newestToken = [rowIndex, columnIndex];
+    }
+
     updateUI();
   })
 

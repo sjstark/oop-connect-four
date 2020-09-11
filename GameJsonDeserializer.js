@@ -23,6 +23,7 @@ export default class GameJsonDeserializer {
     this.game.arrayToBoard(boardArray);
     this.game.player1 = player1;
     this.game.player2 = player2;
+    this.game.currentPlayer = currentPlayer;
     this.game.winnerNumber = winnerNumber;
 
     return this.game;

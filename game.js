@@ -30,9 +30,10 @@ class Game {
     }
 
     playInColumn(columnIndex){
+        let rowIndex = -1;
         let column = this.columns[columnIndex]
         if (!this.isColumnFull(columnIndex)) {
-          column.add(this.currentPlayer);
+          rowIndex = column.add(this.currentPlayer);
 
           this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
         }
@@ -41,6 +42,9 @@ class Game {
         this.checkForColumnWin();
         this.checkForRowWin();
         this.checkForDiagonalWin();
+
+        return rowIndex;
+
     }
 
     checkForColumnWin(){

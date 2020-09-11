@@ -6,9 +6,11 @@ export default class Column {
     }
 
     add(playerNumber){
+        let addIndex;
         for (let i = this.tokensArray.length - 1; i >= 0; i--){
             if (this.tokensArray[i] === null){
                 this.tokensArray[i] = playerNumber;
+                addIndex = i;
                 break;
             }
         }
@@ -16,6 +18,8 @@ export default class Column {
         if (this.tokensArray[0] !== null) {
             this.isFull = true;
         }
+
+        return addIndex;
 
 
     }
