@@ -19,7 +19,7 @@ export default class AnimationHandler {
       if (percentageNum <= 0) {
         clearTimeout(intervalObj);
       }
-    }, 25)
+    }, 20)
   }
 
 

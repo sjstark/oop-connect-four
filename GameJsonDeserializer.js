@@ -18,7 +18,7 @@ export default class GameJsonDeserializer {
       boardArray
     } = serializedGame;
 
-    console.log(this.game);
+    // console.log(this.game);
 
     this.game.arrayToBoard(boardArray);
     this.game.player1 = player1;
